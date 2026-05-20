@@ -1,5 +1,9 @@
 package duoc.dairys.pagos.repository;
 
-public class PagosRepositorio {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import duoc.dairys.pagos.model.Pagos;
+
+public interface PagosRepositorio extends JpaRepository<Pagos, Long> {
     
 }
