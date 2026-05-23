@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import duoc.dairys.pagos.model.Pagos;
 import duoc.dairys.pagos.service.PagosServicio;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
