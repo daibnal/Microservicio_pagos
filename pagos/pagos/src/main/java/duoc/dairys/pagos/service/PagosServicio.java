@@ -1,73 +1,74 @@
 package duoc.dairys.pagos.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import duoc.dairys.pagos.model.Pagos;
+import duoc.dairys.pagos.model.Pago;
 import duoc.dairys.pagos.repository.PagosRepositorio;
 
-
+@Service
 public class PagosServicio {
     @Autowired
     private PagosRepositorio pagosRepositorio;
 
 
-    public boolean procesarPago(Pagos pagos){
-        if(pagos.getMonto() <= 0){
+    public boolean procesarPago(Pago pago){
+        if(pago.getMonto() <= 0){
             return false;
         }
-        pagos.setEstado("PROCESANDO");
+        pago.setEstado("PROCESANDO");
 
-        pagosRepositorio.save(pagos);
+        pagosRepositorio.save(pago);
 
         return true;
     }
 
 
-    public boolean confirmarPago(Long idPagos){
-        Pagos pagos = pagosRepositorio.findById(idPagos).orElse(null);
+    public boolean confirmarPago(Long idPago){
+        Pago pago = pagosRepositorio.findById(idPago).orElse(null);
             //validar si existe el pago
-            if(pagos == null){
+            if(pago == null){
                 return false;
             }
 
             //cambiar estado
-            pagos.setEstado("CONFIRMADO");
+            pago.setEstado("CONFIRMADO");
 
             //guardar cambios
-            pagosRepositorio.save(pagos);
+            pagosRepositorio.save(pago);
             return true;
         
     }
 
-    public boolean rechazarPago(long idPagos){
-        Pagos pagos = pagosRepositorio.findById(idPagos).orElse(null);
+    public boolean rechazarPago(long idPago){
+        Pago pago = pagosRepositorio.findById(idPago).orElse(null);
 
             //validar si existe el pago
-            if(pagos == null){
+            if(pago == null){
                 return false;
             }
             //cambiar estado
-            pagos.setEstado("RECHAZADO");
+            pago.setEstado("RECHAZADO");
 
             //guardar cambios
-            pagosRepositorio.save(pagos);
+            pagosRepositorio.save(pago);
             return true;
     }
 
     
 
-    public boolean cambiarEstado(Long idPagos, String nuevoEstado){
-        Pagos pagos = pagosRepositorio.findById(idPagos).orElse(null);
+    public boolean cambiarEstado(Long idPago, String nuevoEstado){
+        Pago pago = pagosRepositorio.findById(idPago).orElse(null);
             //validar existencia del pago
-            if(pagos == null){
+            if(pago == null){
                 return false;
             }
 
             //cambiar estado
-            pagos.setEstado(nuevoEstado);
+            pago.setEstado(nuevoEstado);
 
             //guardar cambios
-            pagosRepositorio.save(pagos);
+            pagosRepositorio.save(pago);
             return true;
     }
 }

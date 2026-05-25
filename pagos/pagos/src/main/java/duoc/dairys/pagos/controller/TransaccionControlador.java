@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 
-
 @RestController
 @RequestMapping("/transacciones")
 public class TransaccionControlador {
