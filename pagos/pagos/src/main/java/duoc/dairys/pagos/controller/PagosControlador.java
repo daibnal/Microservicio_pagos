@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import duoc.dairys.pagos.DTO.PagoDTO;
 import duoc.dairys.pagos.model.Pago;
 import duoc.dairys.pagos.service.PagosServicio;
 import jakarta.validation.Valid;
@@ -27,8 +28,8 @@ public class PagosControlador {
 
     //procesar pago
     @PostMapping("/procesar")
-    public ResponseEntity<?> procesarPago(@Valid @RequestBody Pago pagos){
-        Boolean procesado = pagosServicio.procesarPago(pagos);
+    public ResponseEntity<?> procesarPago(@Valid @RequestBody PagoDTO dto){
+        Boolean procesado = pagosServicio.procesarPago(dto);
 
         if(procesado){
             return ResponseEntity.ok("Pago procesado correctamente");

@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -39,23 +40,23 @@ public class Pago {
     @Column(name = "monto_pago")
     private Double monto;
 
-     @NotNull(message = "La fecha es obligatoria")
-     @Column(name = "fecha_pago")
+    @NotNull(message = "La fecha es obligatoria")
+    @Column(name = "fecha_pago")
     private LocalDateTime fechaPago;
 
     @NotBlank(message = "El estado no puede estar vacio")
     @Column(name = "estado_pago")
     private String estado;
 
-    @OneToOne
-    @JoinColumn(name = "meotodo_pago_id")
+    @ManyToOne
+    @JoinColumn(name = "metodo_pago_id")
     private MetodoPago metodoPago;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "transaccion_id")
     private Transaccion transaccion;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "factura_id")
     private Factura factura;
 
