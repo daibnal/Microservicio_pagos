@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import duoc.dairys.pagos.model.Factura;
 import duoc.dairys.pagos.service.FacturaServicio;
 import jakarta.validation.Valid;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,4 +61,15 @@ public class FacturaControlador {
         return ResponseEntity.ok("Factura anulada");
     }
     
+    //obtener monto total
+    @GetMapping("/montos")
+    public ResponseEntity<?> obtenerMontoTotal(){
+        List<Double> monto = facturaServicio.obtenerMontoTotal();
+        
+        if(monto.isEmpty()){
+            return ResponseEntity.ok("No hay facturas registradas");
+        }
+        return ResponseEntity.ok(monto);
+
+    }
 }

@@ -1,5 +1,6 @@
 package duoc.dairys.pagos.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,22 @@ public class FacturaServicio {
 
         facturaRepositorio.save(factura);
         return true;
+    }
+
+    //obtener monto total
+    public List<Double> obtenerMontoTotal(){
+        List<Factura> facturas = facturaRepositorio.findAll();
+
+        if(facturas.isEmpty()){
+            return new ArrayList<>();
+        }
+
+        List<Double> monto = new ArrayList<>();
+
+        for(Factura f : facturas){
+            monto.add(f.getMontoTotal());
+        }
+        return monto;
     }
 
 
