@@ -31,27 +31,21 @@ public class MtdoPagoControlador {
     
 
     //guardar metodos de pagos
-    @PostMapping
+    @PostMapping("/guardar")
     public ResponseEntity<?> guardarMetodo(@Valid @RequestBody MetodoPago metodoPago){
         return ResponseEntity.status(201).body(metodoPagoServicio.guardarMetodo(metodoPago));
     }
 
     //activar método de pago
     @PutMapping("/activar/{id}")
-    public ResponseEntity<?> activarMetodo(@PathVariable Long idMetodo){
-        boolean activado = metodoPagoServicio.activarMetodo(idMetodo);
-
-        if(!activado){
-            return ResponseEntity.status(404).body("Metodo de pago no encontrado");
-        }
-        return ResponseEntity.ok("Metodo activado correctamente");
+    public MetodoPago activarMetodo(@PathVariable Long id){
+        return metodoPagoServicio.activarMetodo(id);
     }
-
 
     //desactivar método de pago
     @PutMapping("/desactivar/{id}")
-    public ResponseEntity<?> desactivarMetodo(@PathVariable Long idMetodo){
-        boolean desactivado = metodoPagoServicio.desactivarMetodo(idMetodo);
+    public ResponseEntity<?> desactivarMetodo(@PathVariable Long id){
+        boolean desactivado = metodoPagoServicio.desactivarMetodo(id);
 
         if(!desactivado){
             return ResponseEntity.status(404).body("Metodo de pago no encontrado");

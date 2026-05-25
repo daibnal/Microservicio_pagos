@@ -23,11 +23,12 @@ public class PagoDTO {
     private String estado;
 
     @NotNull
-    private Long idMetodoPago;
+    private Long idMetodo;
 
     @NotNull
     private Long idTransaccion;
 
     @NotNull
     private Long idFactura;
+    
 }

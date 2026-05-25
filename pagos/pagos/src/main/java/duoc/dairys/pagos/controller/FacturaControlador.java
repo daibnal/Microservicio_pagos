@@ -33,15 +33,15 @@ public class FacturaControlador {
     }
 
     //guardar factura
-    @PostMapping
+    @PostMapping("/guardar")
     public ResponseEntity<?> guardarFactura(@Valid @RequestBody Factura factura){
         return ResponseEntity.status(201).body(facturaServicio.guardarFactura(factura));
     }
 
     //generar factura
     @PutMapping("/generar/{id}")
-    public ResponseEntity<?> generarFactura(@PathVariable Long idFactura){
-        boolean generada = facturaServicio.generarFactura(idFactura);
+    public ResponseEntity<?> generarFactura(@PathVariable Long id){
+        boolean generada = facturaServicio.generarFactura(id);
 
         if(!generada){
             return ResponseEntity.status(404).body("Factura no encontrada");
@@ -52,8 +52,8 @@ public class FacturaControlador {
 
     //anular factura
     @PutMapping("/anular/{id}")
-    public ResponseEntity<?> anularFactura(@PathVariable Long idFactura){
-        boolean anulada = facturaServicio.anularFactura(idFactura);
+    public ResponseEntity<?> anularFactura(@PathVariable Long id){
+        boolean anulada = facturaServicio.anularFactura(id);
 
         if(!anulada){
             return ResponseEntity.status(404).body("Factura no encontrada");

@@ -24,36 +24,24 @@ public class MtdoPagoServicio {
     }
 
     //activar metodo
-    public boolean activarMetodo(Long idMetodo){
-        MetodoPago metodo = metodoPagoRepositorio.findById(idMetodo).orElse(null);
+    public MetodoPago activarMetodo(Long idMetodo){
+        MetodoPago metodo = metodoPagoRepositorio.findById(idMetodo)
+        .orElseThrow(() -> new RuntimeException("No existe el método"));
 
-        if(metodo == null){
-            return false;
-        }
+    metodo.setActivo(true);
 
-        metodo.setActivo(true);
-        metodoPagoRepositorio.save(metodo);
-
-        return true;
-    }
+    return metodoPagoRepositorio.save(metodo);
+}
 
     //desactivar metodo
     public boolean desactivarMetodo(Long idMetodo){
-        MetodoPago metodo = metodoPagoRepositorio.findById(idMetodo).orElse(null);
-
-        if(metodo == null){
-            return false;
-        }
-
-        metodo.setActivo(false);
-        metodoPagoRepositorio.save(metodo);
-
-        return true;
+    return metodoPagoRepositorio.findById(idMetodo)
+        .map(metodo -> {
+            metodo.setActivo(false);
+            metodoPagoRepositorio.save(metodo);
+            return true;
+        })
+        .orElse(false);
     }
 
-
-
-
-
-    
 }

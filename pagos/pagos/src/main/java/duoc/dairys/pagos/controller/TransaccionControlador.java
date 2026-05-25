@@ -32,15 +32,15 @@ public class TransaccionControlador {
     }
     
     //guardar transacciones
-    @PostMapping
+    @PostMapping("/guardar")
     public ResponseEntity<?> guardarTransaccion(@Valid @RequestBody Transaccion transaccion){
         return ResponseEntity.status(201).body(transaccionServicio.guardarTransaccion(transaccion));
     }
 
     //confirmar transaccion
     @PutMapping("/confirmar/{id}")
-    public ResponseEntity<?> confirmarTransaccion(@PathVariable Long idTransaccion){
-        boolean confirmada = transaccionServicio.confirmarTransaccion(idTransaccion);
+    public ResponseEntity<?> confirmarTransaccion(@PathVariable Long id){
+        boolean confirmada = transaccionServicio.confirmarTransaccion(id);
 
         if(!confirmada){
             return ResponseEntity.status(404).body("Transaccion no encontrada");
@@ -50,8 +50,8 @@ public class TransaccionControlador {
 
     //anular transaccion
     @PutMapping("/anular/{id}")
-    public ResponseEntity<?> anularTransaccion(@PathVariable Long idTransaccion){
-        boolean anulada = transaccionServicio.anularTransaccion(idTransaccion);
+    public ResponseEntity<?> anularTransaccion(@PathVariable Long id){
+        boolean anulada = transaccionServicio.anularTransaccion(id);
 
         if(!anulada){
             return ResponseEntity.status(404).body("Transaccion no encontrada");

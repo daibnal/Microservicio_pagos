@@ -30,15 +30,15 @@ public class PagosServicio {
 
     //procesar pago
     public boolean procesarPago(PagoDTO dto){
+        MetodoPago metodo = mtdoPagoRepositorio.findById(dto.getIdMetodo()).orElse(null);
+        Transaccion transaccion = transaccionRepositorio.findById(dto.getIdTransaccion()).orElse(null);
+        Factura factura = facturaRepositorio.findById(dto.getIdFactura()).orElse(null);
+
         Pago pago = new Pago();
 
         pago.setMonto(dto.getMonto());
         pago.setFechaPago(dto.getFechaPago());
         pago.setEstado(dto.getEstado());
-
-        MetodoPago metodo = mtdoPagoRepositorio.findById(dto.getIdMetodoPago()).orElse(null);
-        Transaccion transaccion = transaccionRepositorio.findById(dto.getIdTransaccion()).orElse(null);
-        Factura factura = facturaRepositorio.findById(dto.getIdFactura()).orElse(null);
 
         pago.setMetodoPago(metodo);
         pago.setTransaccion(transaccion);
